@@ -24,6 +24,7 @@ def authenticate():
     user = users_collection.find_one({'username': username, 'password': password})
 
     if user:
+        session['username'] = username
         # If user exists, redirect to the homepage
         return redirect(url_for('homepage'))
     else:
@@ -32,7 +33,9 @@ def authenticate():
 
 @app.route('/homepage')
 def homepage():
-    return render_template('home.html')
+    # Retrieve the username from the session
+    username = session.get('username')
+    return render_template('home.html', username=username)
 
 @app.route('/logout', methods=['POST'])
 def logout():

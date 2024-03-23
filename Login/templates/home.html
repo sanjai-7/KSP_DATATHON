@@ -14,7 +14,7 @@
   
         body {
           font-family: Arial, sans-serif;
-          background-image: url("static/images/police_logo.jpg"); /* Background image path */
+          background-image: url("static/images/ksp1.png"); /* Background image path */
           background-size: cover;
           background-position: center;
           height: 100vh;
@@ -53,15 +53,24 @@
           margin: 0 10px;
           text-decoration: none;
           color: #fff; /* Changed to white color */
-          font-weight: 600; /* Changed to semibold */
+          font-weight: 350; /* Changed to semibold */
         }
   
         .content {
           text-align: center;
-          margin-top: 60px; /* Adjust as needed based on navbar height */
+          margin-top: 100px; /* Increased margin-top for better spacing */
           z-index: 0;
+          color: #ffffff; /* Text color */
         }
-  
+        .content h1 {
+          font-size: 50px; /* Larger font size for the heading */
+          margin-bottom: 20px; /* Increased margin bottom for better spacing */
+        }
+        .content p {
+          font-size: 25px; /* Font size for paragraphs */
+          line-height: 1.6; /* Increased line height for better readability */
+        }
+
         .logout-box {
           display: none;
           position: fixed;
@@ -83,14 +92,16 @@
           padding: 10px 20px;
           margin: 0 10px;
           cursor: pointer;
+        
         }
   
         .logout-box button.yes {
           background-color: #4caf50;
           color: #fff;
-          border: black;
+          border: none;
           border-color: black;
           border-radius: 5px;
+          float: right;
         }
   
         .logout-box button.no {
@@ -100,6 +111,7 @@
           border-color: black;
           border-width: 5px;
           border-radius: 5px;
+          float: right;
         }
       </style>
 </head>
@@ -112,13 +124,20 @@
         <a href="#">Home</a>
         <a href="#">Dashboard</a>
         <a href="#">Resources</a>
+        <a href="#">Notifications</a>
         <a href="#" id="logout-link">Logout</a>
     </div>
 
     <div class="content">
-        <h1>Welcome to the Homepage!</h1>
-        <p>Welcome, Officer Smith! How can we assist you today?</p>
-    </div>
+      <!-- Display the username -->
+      {% if username %}
+          <h1>Welcome, {{ username }} ! </h1>
+          <p>"The police are not here to create disorder, they are here to preserve disorder." ~ Richard J. Daley</p>
+      {% else %}
+          <h1>Welcome! </h1>
+          <p>"The police are not here to create disorder, they are here to preserve disorder." ~ Richard J. Daley</p>
+      {% endif %}
+  </div>
 
     <div class="logout-box" id="logout-box">
         <h2>Are you sure you want to logout?</h2>
