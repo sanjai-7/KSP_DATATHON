@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        /* Reset CSS */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+  
+        body {
+          font-family: Arial, sans-serif;
+          background-image: url("static/images/police_logo.jpg"); /* Background image path */
+          background-size: cover;
+          background-position: center;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+  
+        .navbar {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          width: 100%;
+          padding: 10px;
+          background-color: rgba(255, 255, 255, 0.8);
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1000;
+        }
+  
+        .navbar a {
+          margin: 0 10px;
+          text-decoration: none;
+          color: #000;
+        }
+  
+        .content {
+          text-align: center;
+          margin-top: 60px; /* Adjust as needed based on navbar height */
+          z-index: 0;
+        }
+  
+        .logout-box {
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          z-index: 1001;
+        }
+  
+        .logout-box h2 {
+          margin-bottom: 20px;
+        }
+  
+        .logout-box button {
+          padding: 10px 20px;
+          margin: 0 10px;
+          cursor: pointer;
+        }
+  
+        .logout-box button.yes {
+          background-color: #4caf50;
+          color: #fff;
+          border: black;
+          border-color: black;
+          border-radius: 5px;
+        }
+  
+        .logout-box button.no {
+          background-color: #f44336;
+          color: #fff;
+          border: none;
+          border-color: black;
+          border-width: 5px;
+          border-radius: 5px;
+        }
+      </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Resources</a>
+        <a href="#" id="logout-link">Logout</a>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to the Homepage!</h1>
+        <p>Welcome, Officer Smith! How can we assist you today?</p>
+    </div>
+
+    <div class="logout-box" id="logout-box">
+        <h2>Are you sure you want to logout?</h2>
+        <button class="yes" id="logout-yes">Yes</button>
+        <button class="no" id="logout-no">No</button>
+    </div>
+
+    <script>
+        const logoutLink = document.getElementById('logout-link');
+        const logoutBox = document.getElementById('logout-box');
+        const logoutYes = document.getElementById('logout-yes');
+        const logoutNo = document.getElementById('logout-no');
+
+        // Show logout box when logout link is clicked
+        logoutLink.addEventListener('click', () => {
+            logoutBox.style.display = 'block';
+        });
+
+        // Hide logout box when "No" button is clicked
+        logoutNo.addEventListener('click', () => {
+            logoutBox.style.display = 'none';
+        });
+
+        // Logout function
+    const logout = () => {
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = response.url; // Redirect to the login page
+            } else {
+                console.error('Error logging out');
+            }
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
+    };
+
+
+        // Redirect to login page when "Yes" button is clicked
+        logoutYes.addEventListener('click', () => {
+            logout();
+        });
+
+        // Hide logout box when user clicks outside the box
+        window.addEventListener('click', (event) => {
+            if (event.target === logoutBox) {
+                logoutBox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

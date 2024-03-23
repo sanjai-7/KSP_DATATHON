@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Confirmation</title>
+</head>
+<body>
+    <div class="logout-box">
+        <h2>Are you sure you want to logout?</h2>
+        <form action="/logout" method="post">
+            <button type="submit">Yes</button>
+            <button onclick="window.history.back(); return false;">No</button>
+        </form>
+    </div>
+</body>
+</html>
