@@ -10,6 +10,7 @@ app.secret_key = secrets.token_hex(16)
 client = MongoClient('mongodb://localhost:27017/')
 db = client['school']  # Replace 'your_database_name' with your actual database name
 users_collection = db['ksp']  # Assuming you have a collection named 'users'
+ksp1_collection = db['ksp1'] #csv data collection
 
 @app.route('/')
 def login():
@@ -36,6 +37,15 @@ def homepage():
     # Retrieve the username from the session
     username = session.get('username')
     return render_template('home.html', username=username)
+    
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/resources')
+def resources():
+    return render_template('resources.html')
 
 @app.route('/logout', methods=['POST'])
 def logout():

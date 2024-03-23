@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Dashboard</title>
     <style>
+        /* Copy the CSS styles from the home.html file */
         * {
           margin: 0;
           padding: 0;
@@ -40,6 +41,7 @@
           color: #fff; /* Changed to white color */
           font-weight: 350; /* Changed to semibold */
         } 
+
         .content {
           text-align: center;
           margin-top: 100px; /* Increased margin-top for better spacing */
@@ -50,11 +52,7 @@
           font-size: 50px; /* Larger font size for the heading */
           margin-bottom: 20px; /* Increased margin bottom for better spacing */
         }
-        .content p {
-          font-size: 25px; /* Font size for paragraphs */
-          line-height: 1.6; /* Increased line height for better readability */
-        }
-
+        
         .logout-box {
           display: none;
           position: fixed;
@@ -96,10 +94,11 @@
           border-width: 5px;
           border-radius: 5px;
           float: right;
-        } 
-      </style>
+        }
+    </style>
 </head>
 <body>
+    
     <div class="navbar">
         <a href="#" id="home-link">Home</a>
         <a href="#" id="dash-link">Dashboard</a>
@@ -108,15 +107,8 @@
         <a href="#" id="logout-link">Logout</a>
     </div>
     <div class="content">
-      <!-- Display the username -->
-      {% if username %}
-          <h1>Welcome, {{ username }} ! </h1>
-          <p>"The police are not here to create disorder, they are here to preserve disorder." ~ Richard J. Daley</p>
-      {% else %}
-          <h1>Welcome! </h1>
-          <p>"The police are not here to create disorder, they are here to preserve disorder." ~ Richard J. Daley</p>
-      {% endif %}    
-  </div>
+        <h1>This is Dashboard Page</h1>
+    </div>
     <div class="logout-box" id="logout-box">
         <h2>Are you sure you want to logout?</h2>
         <button class="yes" id="logout-yes">Yes</button>
@@ -131,38 +123,38 @@
         const logoutBox = document.getElementById('logout-box');
         const logoutYes = document.getElementById('logout-yes');
         const logoutNo = document.getElementById('logout-no');
-
+        
         // Add an event listener to the home-link element
         homeLink.addEventListener('click', () => {
           window.location.href = '/homepage';
         });
-        
+
         // Add an event listener to the dash-link element
         dashLink.addEventListener('click', () => {
-          window.location.href = '/dashboard';
+            window.location.href = '/dashboard';
         });
-
+    
         // Add an event listener to the res-link element
         resLink.addEventListener('click', () => {
             window.location.href = '/resources';
         });
-
+    
         // Show logout box when logout link is clicked
         logoutLink.addEventListener('click', () => {
             logoutBox.style.display = 'block';
         });
-
+    
         // Hide logout box when "No" button is clicked
         logoutNo.addEventListener('click', () => {
             logoutBox.style.display = 'none';
         });
-
+    
         // Logout function
         const logout = () => {
             fetch('/logout', {
                 method: 'POST',
                 headers: {
-                 'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
             })
             .then(response => {
@@ -176,18 +168,19 @@
                 console.error('Error logging out:', error);
             });
         };
+    
         // Redirect to login page when "Yes" button is clicked
         logoutYes.addEventListener('click', () => {
             logout();
         });
-
+    
         // Hide logout box when user clicks outside the box
         window.addEventListener('click', (event) => {
             if (event.target === logoutBox) {
                 logoutBox.style.display = 'none';
             }
         });
-
+    
         
     </script>
 </body>
